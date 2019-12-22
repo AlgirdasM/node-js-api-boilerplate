@@ -1,0 +1,48 @@
+{
+  "name": "node-js-api-boilerplate",
+  "version": "1.0.0",
+  "description": "Node.js api boilerplate",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "nodemon",
+    "clean": "rimraf dist node_modules",
+    "lint": "npm run lint:js ",
+    "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
+    "lint:js": "npm run lint:eslint src/",
+    "lint:fix": "npm run lint:js -- --fix",
+    "prettier": "prettier --write 'src/**/*.ts'",
+    "prettier:validate": "prettier-check 'src/**/*.ts'"
+  },
+  "author": "Algirdas Mazeika",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.21",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^3.1.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "prettier-check": "^2.0.0",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn prettier:validate && yarn lint"
+    }
+  }
+}
