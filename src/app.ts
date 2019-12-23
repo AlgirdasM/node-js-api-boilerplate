@@ -6,12 +6,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = async () => {
-  const app = express();
-  const { port } = config;
+    const app = express();
+    const { port } = config;
 
-  await Loaders({ app });
+    await Loaders({ app });
 
-  app.listen(port, () => console.log(`App listening on port ${port}`));
+    app.listen(port, () => console.log(`App listening on port ${port}`));
 };
 
 app();
