@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import methodOverride from 'method-override';
 import Routes from '../routes';
+import { handleError, ErrorHandler } from '../helpers/errorHandler';
 
 const ExpressLoader = ({ app }) => {
   // Health Check
@@ -28,22 +29,14 @@ const ExpressLoader = ({ app }) => {
   // Load routes
   Routes({ app });
 
-  // Error handlers
   // 404 error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err['status'] = 404;
-    next(err);
+  app.use(() => {
+    throw new ErrorHandler(404, 'Not found');
   });
 
+  // Error handlers
   app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.json({
-      errors: {
-        message: err.message,
-      },
-    });
-    next();
+    handleError({ err, res });
   });
 };
 
